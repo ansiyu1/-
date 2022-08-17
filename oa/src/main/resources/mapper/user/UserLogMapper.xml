@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.user.UserLogMapper">
+    <resultMap id="userLog" type="userLog">
+        <result property="logId" column="log_id"/>
+        <result property="ipAddr" column="ip_addr"/>
+        <result property="title" column="title"/>
+        <result property="url" column="url"/>
+        <result property="logTime" column="log_time"/>
+        <collection property="userId" ofType="user">
+            <result property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userTel" column="user_tel"/>
+            <result property="realName" column="real_name"/>
+            <result property="pinyin" column="pinyin"/>
+            <result property="eamil" column="eamil"/>
+            <result property="address" column="address"/>
+            <result property="userEdu" column="user_edu"/>
+            <result property="superman" column="superman"/>
+            <result property="userSchool" column="user_school"/>
+            <result property="idCard" column="user_idcard"/>
+            <result property="bank" column="bank"/>
+            <result property="themeSkin" column="theme_skin"/>
+            <result property="birth" column="birth"/>
+            <result property="userSign" column="user_sign"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="imgPath" column="img_path"/>
+            <result property="hireTime" column="hire_time"/>
+            <result property="isLock" column="is_lock"/>
+            <result property="lastLoginIp" column="last_login_ip"/>
+            <result property="lastLoginTime" column="last_login_time"/>
+            <result property="modifyTime" column="modify_time"/>
+            <result property="modifyUserId" column="modify_user_id"/>
+            <result property="fatherId" column="father_id"/>
+            <result property="holiday" column="holiday"/>
+            <result property="sex" column="sex"/>
+            <collection property="positionId" ofType="position">
+                <result property="positionId" column="position_id"/>
+                <result property="name" column="name"/>
+                <result property="level" column="level"/>
+                <result property="describtion" column="describtion"/>
+                <result property="deptid" column="deptid"/>
+            </collection>
+            <collection property="deptId" ofType="dept">
+                <result property="deptId" column="dept_id"/>
+                <result property="deptName" column="dept_name"/>
+                <result property="deptTel" column="dept_tel"/>
+                <result property="deptFax" column="dept_fax"/>
+                <result property="email" column="email"/>
+                <result property="deptAddr" column="dept_addr"/>
+                <result property="deptmanager" column="deptmanager"/>
+            </collection>
+            <collection property="roleId" ofType="role">
+                <result property="roleId" column="role_id"/>
+                <result property="roleName" column="role_name"/>
+                <result property="roleValue" column="role_value"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="selectBaseKey" resultType="cn.oasys.pojo.user.UserLog" resultMap="userLog">
+        SELECT * from aoa_user_log  where aoa_user_log.user_id=#{userId} and (aoa_user_log.title like '%${baseKey}%' or DATE_format(aoa_user_log.log_time,'%Y-%m-%d ') like '%${baseKey}%' or aoa_user_log.ip_addr like '%${baseKey}%') order by aoa_user_log.log_time DESC
+    </select>
+    <select id="userLogs" resultType="cn.oasys.pojo.user.UserLog" resultMap="userLog">
+        SELECT * from aoa_user_log where aoa_user_log.user_id=#{userId} ORDER BY aoa_user_log.log_time DESC LIMIT 0,13
+    </select>
+    <select id="selectByUserOrderByLogTimeDesc" resultType="cn.oasys.pojo.user.UserLog" resultMap="userLog">
+        SELECT * from aoa_user_log  where aoa_user_log.user_id=#{userId} order by aoa_user_log.log_time DESC
+    </select>
+    <select id="findByUserOrderByLogTimeAsc" resultType="cn.oasys.pojo.user.UserLog" resultMap="userLog">
+        from aoa_user_log  where aoa_user_log.user_id=#{userId} order by aoa_user_log.log_time ASC
+    </select>
+
+</mapper>

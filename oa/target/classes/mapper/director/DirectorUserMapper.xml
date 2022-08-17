@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.director.DirectorUserMapper">
+    <resultMap id="directorUser" type="directorUser">
+        <result property="directorUserId" column="director_users_id"/>
+        <result property="catelogName" column="catelog_name"/>
+        <result property="isHandle" column="is_handle"/>
+        <result property="sharetime" column="sharetime"/>
+        <collection property="directorId" ofType="director">
+            <result property="directorId" column="director_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="pinyin" column="pinyin"/>
+            <result property="sex" column="sex"/>
+            <result property="phoneNumber" column="phone_number"/>
+            <result property="imagePath" column="image_path"/>
+            <result property="remark" column="remark"/>
+            <result property="address" column="address"/>
+            <result property="email" column="email"/>
+            <result property="companyNumber" column="company_number"/>
+            <result property="companyname" column="companyname"/>
+            <collection property="userId" ofType="user">
+                <result property="userId" column="user_id"/>
+                <result property="userName" column="user_name"/>
+                <result property="userTel" column="user_tel"/>
+                <result property="realName" column="real_name"/>
+                <result property="pinyin" column="pinyin"/>
+                <result property="eamil" column="eamil"/>
+                <result property="address" column="address"/>
+                <result property="userEdu" column="user_edu"/>
+                <result property="superman" column="superman"/>
+                <result property="userSchool" column="user_school"/>
+                <result property="idCard" column="user_idcard"/>
+                <result property="bank" column="bank"/>
+                <result property="themeSkin" column="theme_skin"/>
+                <result property="birth" column="birth"/>
+                <result property="userSign" column="user_sign"/>
+                <result property="password" column="password"/>
+                <result property="salary" column="salary"/>
+                <result property="imgPath" column="img_path"/>
+                <result property="hireTime" column="hire_time"/>
+                <result property="isLock" column="is_lock"/>
+                <result property="lastLoginIp" column="last_login_ip"/>
+                <result property="lastLoginTime" column="last_login_time"/>
+                <result property="modifyTime" column="modify_time"/>
+                <result property="modifyUserId" column="modify_user_id"/>
+                <result property="fatherId" column="father_id"/>
+                <result property="holiday" column="holiday"/>
+                <result property="sex" column="sex"/>
+                <collection property="positionId" ofType="position">
+                    <result property="positionId" column="position_id"/>
+                    <result property="name" column="name"/>
+                    <result property="level" column="level"/>
+                    <result property="describtion" column="describtion"/>
+                    <result property="deptid" column="deptid"/>
+                </collection>
+                <collection property="deptId" ofType="dept">
+                    <result property="deptId" column="dept_id"/>
+                    <result property="deptName" column="dept_name"/>
+                    <result property="deptTel" column="dept_tel"/>
+                    <result property="deptFax" column="dept_fax"/>
+                    <result property="email" column="email"/>
+                    <result property="deptAddr" column="dept_addr"/>
+                    <result property="deptmanager" column="deptmanager"/>
+                </collection>
+                <collection property="roleId" ofType="role">
+                    <result property="roleId" column="role_id"/>
+                    <result property="roleName" column="role_name"/>
+                    <result property="roleValue" column="role_value"/>
+                </collection>
+            </collection>
+        </collection>
+        <collection property="shareUserId" ofType="user">
+            <result property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userTel" column="user_tel"/>
+            <result property="realName" column="real_name"/>
+            <result property="pinyin" column="pinyin"/>
+            <result property="eamil" column="eamil"/>
+            <result property="address" column="address"/>
+            <result property="userEdu" column="user_edu"/>
+            <result property="superman" column="superman"/>
+            <result property="userSchool" column="user_school"/>
+            <result property="idCard" column="user_idcard"/>
+            <result property="bank" column="bank"/>
+            <result property="themeSkin" column="theme_skin"/>
+            <result property="birth" column="birth"/>
+            <result property="userSign" column="user_sign"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="imgPath" column="img_path"/>
+            <result property="hireTime" column="hire_time"/>
+            <result property="isLock" column="is_lock"/>
+            <result property="lastLoginIp" column="last_login_ip"/>
+            <result property="lastLoginTime" column="last_login_time"/>
+            <result property="modifyTime" column="modify_time"/>
+            <result property="modifyUserId" column="modify_user_id"/>
+            <result property="fatherId" column="father_id"/>
+            <result property="holiday" column="holiday"/>
+            <result property="sex" column="sex"/>
+            <collection property="positionId" ofType="position">
+                <result property="positionId" column="position_id"/>
+                <result property="name" column="name"/>
+                <result property="level" column="level"/>
+                <result property="describtion" column="describtion"/>
+                <result property="deptid" column="deptid"/>
+            </collection>
+            <collection property="deptId" ofType="dept">
+                <result property="deptId" column="dept_id"/>
+                <result property="deptName" column="dept_name"/>
+                <result property="deptTel" column="dept_tel"/>
+                <result property="deptFax" column="dept_fax"/>
+                <result property="email" column="email"/>
+                <result property="deptAddr" column="dept_addr"/>
+                <result property="deptmanager" column="deptmanager"/>
+            </collection>
+            <collection property="roleId" ofType="role">
+                <result property="roleId" column="role_id"/>
+                <result property="roleName" column="role_name"/>
+                <result property="roleValue" column="role_value"/>
+            </collection>
+        </collection>
+        <collection property="userId" ofType="user">
+            <result property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userTel" column="user_tel"/>
+            <result property="realName" column="real_name"/>
+            <result property="pinyin" column="pinyin"/>
+            <result property="eamil" column="eamil"/>
+            <result property="address" column="address"/>
+            <result property="userEdu" column="user_edu"/>
+            <result property="superman" column="superman"/>
+            <result property="userSchool" column="user_school"/>
+            <result property="idCard" column="user_idcard"/>
+            <result property="bank" column="bank"/>
+            <result property="themeSkin" column="theme_skin"/>
+            <result property="birth" column="birth"/>
+            <result property="userSign" column="user_sign"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="imgPath" column="img_path"/>
+            <result property="hireTime" column="hire_time"/>
+            <result property="isLock" column="is_lock"/>
+            <result property="lastLoginIp" column="last_login_ip"/>
+            <result property="lastLoginTime" column="last_login_time"/>
+            <result property="modifyTime" column="modify_time"/>
+            <result property="modifyUserId" column="modify_user_id"/>
+            <result property="fatherId" column="father_id"/>
+            <result property="holiday" column="holiday"/>
+            <result property="sex" column="sex"/>
+            <collection property="positionId" ofType="position">
+                <result property="positionId" column="position_id"/>
+                <result property="name" column="name"/>
+                <result property="level" column="level"/>
+                <result property="describtion" column="describtion"/>
+                <result property="deptid" column="deptid"/>
+            </collection>
+            <collection property="deptId" ofType="dept">
+                <result property="deptId" column="dept_id"/>
+                <result property="deptName" column="dept_name"/>
+                <result property="deptTel" column="dept_tel"/>
+                <result property="deptFax" column="dept_fax"/>
+                <result property="email" column="email"/>
+                <result property="deptAddr" column="dept_addr"/>
+                <result property="deptmanager" column="deptmanager"/>
+            </collection>
+            <collection property="roleId" ofType="role">
+                <result property="roleId" column="role_id"/>
+                <result property="roleName" column="role_name"/>
+                <result property="roleValue" column="role_value"/>
+            </collection>
+        </collection>
+
+    </resultMap>
+    <select id="findByUserAndShareUserNotNullAndHandle" resultType="cn.oasys.pojo.director.DirectorUser" resultMap="directorUser">
+        select* from aoa_director_users,aoa_user,aoa_director where aoa_director_users.share_user_id=aoa_user.user_id and aoa_director.director_id= aoa_director_users.director_id and aoa_director_users.share_user_id= #{userId} and aoa_director_users.is_handle=#{isHandle}
+    </select>
+    <select id="findByDirectorAndUser" resultType="cn.oasys.pojo.director.DirectorUser" resultMap="directorUser">
+        select* from aoa_director_users,aoa_user,aoa_director where aoa_director_users.share_user_id=aoa_user.user_id and aoa_director.director_id= aoa_director_users.director_id and aoa_director_users.share_user_id= #{userId} and aoa_director_users.director_id=#{directorId}
+    </select>
+    <!-- 判断三个条件
+		1、外部分类是否为空
+		2、字母值是否为空
+		3、关键字是否为空
+	 -->
+    <select id="allDirector" resultType="java.util.Map" resultMap="directorUser">
+            SELECT d.*,u.*
+            FROM aoa_director_users AS u LEFT JOIN aoa_director AS d ON
+            d.director_id = u.director_id
+            WHERE u.user_id=#{userId} AND u.director_id is NOT null AND u.is_handle=1
+            <if test="pinyin !='ALL'">
+                AND d.pinyin LIKE '${pinyin}%'
+            </if>
+            <if test="outtype !=null and outtype !=''">
+                AND u.catelog_name = '${outtype}'
+            </if>
+            <if test="baseKey !=null and baseKey !=''">
+                AND
+                (d.user_name LIKE '%${baseKey}%'
+                OR d.phone_number LIKE '%${baseKey}%'
+                OR d.companyname LIKE '%${baseKey}%'
+                OR d.pinyin LIKE '${baseKey}%'
+                OR u.catelog_name LIKE '%${baseKey}%'
+                )
+            </if>
+            order by u.catelog_name
+        </select>
+
+</mapper>

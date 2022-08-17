@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.file.FileListMapper">
+    <resultMap id="fileList" type="fileList">
+        <result property="fileId" column="file_id"/>
+        <result property="fileName" column="file_name"/>
+        <result property="filePath" column="file_path"/>
+        <result property="size" column="size"/>
+        <result property="contentType" column="content_type"/>
+        <result property="uploadTime" column="upload_time"/>
+        <result property="model" column="model"/>
+        <result property="fileShuffix" column="file_shuffix"/>
+        <result property="fileIstrash" column="file_istrash"/>
+        <result property="fileIsshare" column="file_isshare"/>
+        <collection property="fileUserId" ofType="user">
+            <result property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userTel" column="user_tel"/>
+            <result property="realName" column="real_name"/>
+            <result property="pinyin" column="pinyin"/>
+            <result property="eamil" column="eamil"/>
+            <result property="address" column="address"/>
+            <result property="userEdu" column="user_edu"/>
+            <result property="superman" column="superman"/>
+            <result property="userSchool" column="user_school"/>
+            <result property="idCard" column="user_idcard"/>
+            <result property="bank" column="bank"/>
+            <result property="themeSkin" column="theme_skin"/>
+            <result property="birth" column="birth"/>
+            <result property="userSign" column="user_sign"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="imgPath" column="img_path"/>
+            <result property="hireTime" column="hire_time"/>
+            <result property="isLock" column="is_lock"/>
+            <result property="lastLoginIp" column="last_login_ip"/>
+            <result property="lastLoginTime" column="last_login_time"/>
+            <result property="modifyTime" column="modify_time"/>
+            <result property="modifyUserId" column="modify_user_id"/>
+            <result property="fatherId" column="father_id"/>
+            <result property="holiday" column="holiday"/>
+            <result property="sex" column="sex"/>
+            <collection property="positionId" ofType="position">
+                <result property="positionId" column="position_id"/>
+                <result property="name" column="name"/>
+                <result property="level" column="level"/>
+                <result property="describtion" column="describtion"/>
+                <result property="deptid" column="deptid"/>
+            </collection>
+            <collection property="deptId" ofType="dept">
+                <result property="deptId" column="dept_id"/>
+                <result property="deptName" column="dept_name"/>
+                <result property="deptTel" column="dept_tel"/>
+                <result property="deptFax" column="dept_fax"/>
+                <result property="email" column="email"/>
+                <result property="deptAddr" column="dept_addr"/>
+                <result property="deptmanager" column="deptmanager"/>
+            </collection>
+            <collection property="roleId" ofType="role">
+                <result property="roleId" column="role_id"/>
+                <result property="roleName" column="role_name"/>
+                <result property="roleValue" column="role_value"/>
+            </collection>
+        </collection>
+        <collection property="pathId" ofType="filePath">
+            <result property="pathId" column="path_id"/>
+            <result property="parentId" column="parent_id"/>
+            <result property="pathName" column="path_name"/>
+            <result property="pathIstrash" column="path_istrash"/>
+            <result property="pathUserId" column="path_user_id"/>
+        </collection>
+    </resultMap>
+    <insert id="insertFileList">
+        INSERT INTO aoa_file_list ( file_name,file_path,size,content_type,upload_time,model,path_id,file_user_id,file_shuffix,file_istrash,file_isshare ) VALUES( #{fileName},#{filePath},#{size},#{contentType},#{uploadTime},#{model},#{pathId.pathId},#{fileUserId.userId},#{fileShuffix},#{fileIstrash},#{fileIsshare} )
+    </insert>
+    <select id="findByPathAndFileIsTrash" resultType="cn.oasys.pojo.file.FileList" resultMap="fileList">
+        SELECT * FROM aoa_file_list,aoa_file_path WHERE aoa_file_list.path_id=aoa_file_path.path_id and aoa_file_list.path_id=#{pathId} and aoa_file_list.file_istrash=#{isTrash}
+    </select>
+    <select id="findByFileNameAndPath" resultType="cn.oasys.pojo.file.FileList" resultMap="fileList">
+        SELECT * FROM aoa_file_list,aoa_file_path WHERE aoa_file_list.path_id=aoa_file_path.path_id and aoa_file_list.path_id=#{pathId} and aoa_file_list.file_name=#{name}
+    </select>
+    <select id="findByPath" resultType="cn.oasys.pojo.file.FileList" resultMap="fileList">
+        SELECT * FROM aoa_file_list,aoa_file_path WHERE aoa_file_list.path_id=aoa_file_path.path_id and aoa_file_list.path_id=#{pathId}
+    </select>
+    <select id="findByFileList" resultType="cn.oasys.pojo.file.FileList" resultMap="fileList">
+        SELECT * FROM aoa_file_list,aoa_file_path,aoa_user WHERE aoa_file_list.file_user_id=aoa_user.user_id and aoa_file_list.path_id=aoa_file_path.path_id and aoa_file_list.file_id=#{mcFileId}
+    </select>
+    <select id="findByUserAndContentType" resultType="cn.oasys.pojo.file.FileList" resultMap="fileList">
+         SELECT * FROM aoa_file_list,aoa_file_path,aoa_user WHERE aoa_file_list.file_user_id=aoa_user.user_id and aoa_file_list.path_id=aoa_file_path.path_id and aoa_file_list.file_user_id=#{userId} and aoa_file_list.content_type like '%${contentType}%' and aoa_file_list.file_istrash=#{isTrash}
+    </select>
+    <select id="findDocument" resultType="cn.oasys.pojo.file.FileList" resultMap="fileList">
+        SELECT * FROM aoa_file_list ,aoa_file_path,aoa_user WHERE aoa_file_list.file_user_id=aoa_user.user_id and aoa_file_list.file_user_id =#{userId} and aoa_file_list.content_type NOT LIKE 'image/%' and aoa_file_list.content_type NOT LIKE 'application/x%' and aoa_file_list.content_type NOT LIKE 'video/%' and aoa_file_list.content_type NOT LIKE 'audio/%'
+    </select>
+    <select id="selectByFileIsShareAndFileIsTrash" resultType="cn.oasys.pojo.file.FileList" resultMap="fileList">
+        SELECT * FROM aoa_file_list ,aoa_file_path,aoa_user WHERE aoa_file_list.file_user_id=aoa_user.user_id and aoa_file_list.file_isshare =#{isShare} and aoa_file_list.file_istrash=#{isTrash}
+    </select>
+
+</mapper>

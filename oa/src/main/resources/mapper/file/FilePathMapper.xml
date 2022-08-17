@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.file.FilePathMapper">
+    <resultMap id="filePath" type="filePath">
+        <result property="pathId" column="path_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="pathName" column="path_name"/>
+        <result property="pathIstrash" column="path_istrash"/>
+        <result property="pathUserId" column="path_user_id"/>
+    </resultMap>
+    <select id="selectPath" resultType="cn.oasys.pojo.file.FilePath" resultMap="filePath">
+        SELECT * FROM aoa_file_path WHERE aoa_file_path.parent_id = #{pathId}
+    </select>
+
+
+</mapper>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.mail.MailNumberMapper">
+    <resultMap id="mailNumber" type="mailNumber">
+        <result property="mailNumberId" column="mail_number_id"/>
+        <result property="mailType" column="mail_type"/>
+        <result property="status" column="status"/>
+        <result property="mailUserName" column="mail_user_name"/>
+        <result property="mailCreateTime" column="mail_create_time"/>
+        <result property="mailAccount" column="mail_account"/>
+        <result property="password" column="password"/>
+        <result property="mailDes" column="mail_des"/>
+        <collection property="mailNumUserId" ofType="user">
+            <result property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userTel" column="user_tel"/>
+            <result property="realName" column="real_name"/>
+            <result property="pinyin" column="pinyin"/>
+            <result property="eamil" column="eamil"/>
+            <result property="address" column="address"/>
+            <result property="userEdu" column="user_edu"/>
+            <result property="superman" column="superman"/>
+            <result property="userSchool" column="user_school"/>
+            <result property="idCard" column="user_idcard"/>
+            <result property="bank" column="bank"/>
+            <result property="themeSkin" column="theme_skin"/>
+            <result property="birth" column="birth"/>
+            <result property="userSign" column="user_sign"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="imgPath" column="img_path"/>
+            <result property="hireTime" column="hire_time"/>
+            <result property="isLock" column="is_lock"/>
+            <result property="lastLoginIp" column="last_login_ip"/>
+            <result property="lastLoginTime" column="last_login_time"/>
+            <result property="modifyTime" column="modify_time"/>
+            <result property="modifyUserId" column="modify_user_id"/>
+            <result property="fatherId" column="father_id"/>
+            <result property="holiday" column="holiday"/>
+            <result property="sex" column="sex"/>
+            <collection property="positionId" ofType="position">
+                <result property="positionId" column="position_id"/>
+                <result property="name" column="name"/>
+                <result property="level" column="level"/>
+                <result property="describtion" column="describtion"/>
+                <result property="deptid" column="deptid"/>
+            </collection>
+            <collection property="deptId" ofType="dept">
+                <result property="deptId" column="dept_id"/>
+                <result property="deptName" column="dept_name"/>
+                <result property="deptTel" column="dept_tel"/>
+                <result property="deptFax" column="dept_fax"/>
+                <result property="email" column="email"/>
+                <result property="deptAddr" column="dept_addr"/>
+                <result property="deptmanager" column="deptmanager"/>
+            </collection>
+            <collection property="roleId" ofType="role">
+                <result property="roleId" column="role_id"/>
+                <result property="roleName" column="role_name"/>
+                <result property="roleValue" column="role_value"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <insert id="insertMailNumber">
+        INSERT INTO aoa_mailnumber ( mail_type,status,mail_user_name,mail_create_time,mail_account,password,mail_des,mail_num_user_id ) VALUES( #{mailType},#{status},#{mailUserName},#{mailCreateTime},#{mailAccount},#{password},#{mailDes},#{mailNumUserId.userId} )
+    </insert>
+    <select id="findByMailUserId" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.mail_num_user_id=#{userId} ORDER BY aoa_mailnumber.mail_type
+    </select>
+    <select id="findByMailUserIdOrderByMailType" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.mail_num_user_id=#{userId} ORDER BY aoa_mailnumber.mail_type
+    </select>
+    <select id="findByMailUserIdOrderByStatus" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.mail_num_user_id=#{userId} ORDER BY aoa_mailnumber.`status`
+    </select>
+    <select id="findByMailUserIdOrderByMailCreateTimeDesc" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.mail_num_user_id=#{userId} ORDER BY aoa_mailnumber.mail_create_time
+    </select>
+    <select id="findByMailUserNameLikeAndMailUserId" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.mail_user_name like '%${val}%' and aoa_mailnumber.mail_num_user_id=#{userId}
+    </select>
+    <select id="selectAccountInformation" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.mail_number_id=#{accountId}
+    </select>
+    <select id="findByStatusAndMailUserId" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.status=#{status} and aoa_mailnumber.mail_num_user_id=#{userId}
+    </select>
+    <select id="selectMailNumber" resultType="cn.oasys.pojo.mail.MailNumber" resultMap="mailNumber">
+        SELECT * FROM aoa_mailnumber,aoa_user WHERE aoa_mailnumber.mail_num_user_id=aoa_user.user_id and aoa_mailnumber.mail_number_id=#{inmail}
+    </select>
+
+
+</mapper>

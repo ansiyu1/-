@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.user.UserMapper">
+    <resultMap id="user" type="User">
+        <result property="userId" column="user_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="userTel" column="user_tel"/>
+        <result property="realName" column="real_name"/>
+        <result property="pinyin" column="pinyin"/>
+        <result property="eamil" column="eamil"/>
+        <result property="address" column="address"/>
+        <result property="userEdu" column="user_edu"/>
+        <result property="superman" column="superman"/>
+        <result property="userSchool" column="user_school"/>
+        <result property="idCard" column="user_idcard"/>
+        <result property="bank" column="bank"/>
+        <result property="themeSkin" column="theme_skin"/>
+        <result property="birth" column="birth"/>
+        <result property="userSign" column="user_sign"/>
+        <result property="password" column="password"/>
+        <result property="salary" column="salary"/>
+        <result property="imgPath" column="img_path"/>
+        <result property="hireTime" column="hire_time"/>
+        <result property="isLock" column="is_lock"/>
+        <result property="lastLoginIp" column="last_login_ip"/>
+        <result property="lastLoginTime" column="last_login_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="modifyUserId" column="modify_user_id"/>
+        <result property="fatherId" column="father_id"/>
+        <result property="holiday" column="holiday"/>
+        <result property="sex" column="sex"/>
+        <collection property="positionId" ofType="position">
+            <result property="positionId" column="position_id"/>
+            <result property="name" column="name"/>
+            <result property="level" column="level"/>
+            <result property="describtion" column="describtion"/>
+            <result property="deptid" column="deptid"/>
+        </collection>
+        <collection property="deptId" ofType="dept">
+            <result property="deptId" column="dept_id"/>
+            <result property="deptName" column="dept_name"/>
+            <result property="deptTel" column="dept_tel"/>
+            <result property="deptFax" column="dept_fax"/>
+            <result property="email" column="email"/>
+            <result property="deptAddr" column="dept_addr"/>
+            <result property="deptmanager" column="deptmanager"/>
+        </collection>
+        <collection property="roleId" ofType="role">
+            <result property="roleId" column="role_id"/>
+            <result property="roleName" column="role_name"/>
+            <result property="roleValue" column="role_value"/>
+        </collection>
+    </resultMap>
+    <select id="findLoginUser" resultType="User" resultMap="user">
+        SELECT*FROM aoa_user,aoa_dept,aoa_role_,aoa_position WHERE aoa_user.dept_id = aoa_dept.dept_id and aoa_role_.role_id=aoa_user.role_id and aoa_position.position_id=aoa_user.position_id and (aoa_user.user_name=#{userName} or aoa_user.user_tel=#{userTel}) AND aoa_user.`password`=#{password}
+    </select>
+    <select id="myEmployUser" resultType="cn.oasys.pojo.user.User" resultMap="user">
+        select * from aoa_user,aoa_dept where  (aoa_user.user_name like "%${baseKey}%" or aoa_dept.dept_name like "%${baseKey}%") AND aoa_user.dept_id=aoa_dept.dept_id and aoa_user.father_id=#{fatherId}
+    </select>
+    <select id="selectAllUser" resultType="cn.oasys.pojo.user.User" resultMap="user">
+        SELECT*FROM aoa_user,aoa_dept,aoa_role_,aoa_position WHERE aoa_user.dept_id = aoa_dept.dept_id and aoa_role_.role_id=aoa_user.role_id and aoa_position.position_id=aoa_user.position_id
+    </select>
+    <select id="selectReviewed" resultType="cn.oasys.pojo.user.User" resultMap="user">
+        SELECT * FROM aoa_user ,aoa_dept,aoa_role_,aoa_position WHERE aoa_user.dept_id = aoa_dept.dept_id and aoa_role_.role_id=aoa_user.role_id and aoa_position.position_id=aoa_user.position_id and user_id = #{userId}
+    </select>
+    <select id="selectByPinyinLike" resultType="cn.oasys.pojo.user.User" resultMap="user">
+         SELECT * FROM aoa_user ,aoa_dept,aoa_role_,aoa_position WHERE aoa_user.dept_id = aoa_dept.dept_id and aoa_role_.role_id=aoa_user.role_id and aoa_position.position_id=aoa_user.position_id and pinyin = #{pinyin}
+    </select>
+    <select id="findUsers" resultType="cn.oasys.pojo.user.User" resultMap="user">
+        SELECT * FROM aoa_user ,aoa_dept,aoa_role_,aoa_position WHERE aoa_user.dept_id = aoa_dept.dept_id and aoa_role_.role_id=aoa_user.role_id and aoa_position.position_id=aoa_user.position_id and aoa_user.user_name like #{baseKey} or aoa_dept.dept_name like #{baseKey} or aoa_user.user_tel like #{baseKey} or aoa_position.name like #{baseKey} or aoa_user.pinyin like #{pinyin}
+    </select>
+    <select id="findSelectUsers" resultType="cn.oasys.pojo.user.User" resultMap="user">
+        SELECT * FROM aoa_user ,aoa_dept,aoa_role_,aoa_position WHERE aoa_user.dept_id = aoa_dept.dept_id and aoa_role_.role_id=aoa_user.role_id and aoa_position.position_id=aoa_user.position_id and (aoa_user.user_name like #{baseKey} or aoa_dept.dept_name like #{baseKey} or aoa_user.user_tel like #{baseKey} or aoa_position.name like #{baseKey}) and aoa_user.pinyin like #{pinyin}
+    </select>
+</mapper>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.director.DirectorMapper">
+    <resultMap id="director" type="director">
+        <result property="directorId" column="director_id"/>
+        <result property="userName" column="user_name"/>
+        <result property="pinyin" column="pinyin"/>
+        <result property="sex" column="sex"/>
+        <result property="phoneNumber" column="phone_number"/>
+        <result property="imagePath" column="image_path"/>
+        <result property="remark" column="remark"/>
+        <result property="address" column="address"/>
+        <result property="email" column="email"/>
+        <result property="companyNumber" column="company_number"/>
+        <result property="companyname" column="companyname"/>
+        <collection property="userId" ofType="user">
+            <result property="userId" column="user_id"/>
+            <result property="userName" column="user_name"/>
+            <result property="userTel" column="user_tel"/>
+            <result property="realName" column="real_name"/>
+            <result property="pinyin" column="pinyin"/>
+            <result property="eamil" column="eamil"/>
+            <result property="address" column="address"/>
+            <result property="userEdu" column="user_edu"/>
+            <result property="superman" column="superman"/>
+            <result property="userSchool" column="user_school"/>
+            <result property="idCard" column="user_idcard"/>
+            <result property="bank" column="bank"/>
+            <result property="themeSkin" column="theme_skin"/>
+            <result property="birth" column="birth"/>
+            <result property="userSign" column="user_sign"/>
+            <result property="password" column="password"/>
+            <result property="salary" column="salary"/>
+            <result property="imgPath" column="img_path"/>
+            <result property="hireTime" column="hire_time"/>
+            <result property="isLock" column="is_lock"/>
+            <result property="lastLoginIp" column="last_login_ip"/>
+            <result property="lastLoginTime" column="last_login_time"/>
+            <result property="modifyTime" column="modify_time"/>
+            <result property="modifyUserId" column="modify_user_id"/>
+            <result property="fatherId" column="father_id"/>
+            <result property="holiday" column="holiday"/>
+            <result property="sex" column="sex"/>
+            <collection property="positionId" ofType="position">
+                <result property="positionId" column="position_id"/>
+                <result property="name" column="name"/>
+                <result property="level" column="level"/>
+                <result property="describtion" column="describtion"/>
+                <result property="deptid" column="deptid"/>
+            </collection>
+            <collection property="deptId" ofType="dept">
+                <result property="deptId" column="dept_id"/>
+                <result property="deptName" column="dept_name"/>
+                <result property="deptTel" column="dept_tel"/>
+                <result property="deptFax" column="dept_fax"/>
+                <result property="email" column="email"/>
+                <result property="deptAddr" column="dept_addr"/>
+                <result property="deptmanager" column="deptmanager"/>
+            </collection>
+            <collection property="roleId" ofType="role">
+                <result property="roleId" column="role_id"/>
+                <result property="roleName" column="role_name"/>
+                <result property="roleValue" column="role_value"/>
+            </collection>
+        </collection>
+    </resultMap>
+    <select id="selectDirector" resultType="cn.oasys.pojo.director.Director" resultMap="director">
+        SELECT * FROM aoa_director,aoa_user WHERE aoa_director.user_id=aoa_user.user_id and aoa_director.director_id = #{did}
+    </select>
+
+</mapper>

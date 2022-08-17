@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.oasys.dao.SysMenuMapper">
+
+
+    <insert id="addMenu">
+        INSERT INTO aoa_type_list (type_color,type_model,type_name,sort_value) VALUES (#{typeColor},#{typeModel},#{typeName},#{typeSortValue});
+    </insert>
+
+</mapper>
